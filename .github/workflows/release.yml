@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  conventional-commits:
+    name: Conventional commits style enforcement
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up python
+        uses: ./.github/actions/set-up-python-with-poetry
+        with:
+          python-version: "3.11"
+          install-poetry: "false"
+      - name: Install gitlint
+        run: |
+          pip install --constraint=.github/constraints.txt gitlint
+          gitlint --version
+      - name: Run gitlint for the latest commit
+        run: gitlint
+
+  release:
+    name: Release
+    needs: conventional-commits
+    runs-on: ubuntu-latest
+    concurrency: release
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python with Poetry
+        uses: ./.github/actions/set-up-python-with-poetry
+        with:
+          python-version: "3.11"
+
+      - name: Check if there is a parent commit
+        id: check-parent-commit
+        run: |
+          echo "{sha}=$(git rev-parse --verify --quiet HEAD^)" >> $GITHUB_OUTPUT
+
+      - name: Python Semantic Release
+        id: release
+        uses: python-semantic-release/python-semantic-release@v8.3.0
+        with:
+          github_token: ${{ secrets.GH_SEMANTIC_RELEASE_PAT }}
+
+      - name: Publish package distributions to GitHub Releases
+        uses: python-semantic-release/upload-to-gh-release@main
+        if: steps.release.outputs.released == 'true'
+        with:
+          github_token: ${{ secrets.GH_SEMANTIC_RELEASE_PAT }}

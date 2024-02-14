@@ -1,0 +1,17 @@
+{
+  "_checkout": null,
+  "_output_dir": "/Users/npage/workspace-sbp/playground",
+  "_repo_dir": "/Users/npage/.cookiecutters/cookiecutter-hypermodern-python",
+  "_template": "git+ssh://git@github.com/schubergphilis/cookiecutter-hypermodern-python.git",
+  "author": "Ninad Page",
+  "copyright_year": "2024",
+  "development_status": "Development Status :: 3 - Alpha",
+  "email": "ninadpage@users.noreply.github.com",
+  "friendly_name": "Terraform Cloud Okta Warden",
+  "github_user": "schubergphilis",
+  "license": "Apache-2.0",
+  "package_name": "terraform_cloud_okta_warden",
+  "project_name": "terraform-cloud-okta-warden",
+  "repo_name": "terraform-cloud-okta-warden",
+  "version": "0.0.0"
+}

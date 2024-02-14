@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+  - package-ecosystem: pip
+    directory: "/.github/workflows"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+  - package-ecosystem: pip
+    directory: "/docs"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "docs"
+      include: "scope"
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    versioning-strategy: lockfile-only
+    allow:
+      - dependency-type: "all"
+    commit-message:
+      prefix: "feat"
+      prefix-development: "chore"
+      include: "scope"

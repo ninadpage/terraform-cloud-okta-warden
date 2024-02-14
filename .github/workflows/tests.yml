@@ -1,0 +1,143 @@
+name: Tests
+
+on:
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  conventional-commits:
+    name: Conventional commits style enforcement
+    # Only run this for pull requests
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Set up python
+        uses: ./.github/actions/set-up-python-with-poetry
+        with:
+          python-version: "3.11"
+          install-poetry: "false"
+      - name: Install gitlint
+        run: |
+          pip install --constraint=.github/constraints.txt gitlint
+          gitlint --version
+      - name: Run gitlint for all commits in the PR
+        run: |
+          git fetch origin
+          gitlint --commits "origin/${GITHUB_BASE_REF}..HEAD"
+
+  tests:
+    name: ${{ matrix.session }} ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { python: "3.11", os: "ubuntu-latest", session: "pre-commit" }
+          - { python: "3.11", os: "ubuntu-latest", session: "safety" }
+          - { python: "3.11", os: "ubuntu-latest", session: "mypy" }
+          - { python: "3.10", os: "ubuntu-latest", session: "mypy" }
+          - { python: "3.11", os: "ubuntu-latest", session: "tests" }
+          - { python: "3.10", os: "ubuntu-latest", session: "tests" }
+          - { python: "3.11", os: "windows-latest", session: "tests" }
+          - { python: "3.11", os: "macos-latest", session: "tests" }
+          - { python: "3.11", os: "ubuntu-latest", session: "typeguard" }
+          - { python: "3.11", os: "ubuntu-latest", session: "xdoctest" }
+          - { python: "3.11", os: "ubuntu-latest", session: "docs-build" }
+
+    env:
+      NOXSESSION: ${{ matrix.session }}
+      FORCE_COLOR: "1"
+      PRE_COMMIT_COLOR: "always"
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python }} with Poetry
+        uses: ./.github/actions/set-up-python-with-poetry
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install Nox
+        run: |
+          pipx install --pip-args=--constraint=.github/constraints.txt nox
+          nox --version
+
+      - name: Compute pre-commit cache key
+        if: matrix.session == 'pre-commit'
+        id: pre-commit-cache
+        shell: python
+        run: |
+          import os
+          import hashlib
+          import sys
+
+          python = "py{}.{}".format(*sys.version_info[:2])
+          payload = sys.version.encode() + sys.executable.encode()
+          digest = hashlib.sha256(payload).hexdigest()
+          result = "${{ runner.os }}-{}-{}-pre-commit".format(python, digest[:8])
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+              print(f"{result}={result}", file=fh)
+
+      - name: Restore pre-commit cache
+        uses: actions/cache@v3
+        if: matrix.session == 'pre-commit'
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ steps.pre-commit-cache.outputs.result }}-
+
+      - name: Run Nox
+        run: |
+          nox --python=${{ matrix.python }}
+
+      - name: Upload coverage data
+        if: always() && matrix.session == 'tests'
+        uses: "actions/upload-artifact@v3"
+        with:
+          name: coverage-data
+          path: ".coverage.*"
+
+      - name: Upload documentation
+        if: matrix.session == 'docs-build'
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: docs/_build
+
+  coverage:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python with Poetry
+        uses: ./.github/actions/set-up-python-with-poetry
+        with:
+          python-version: "3.11"
+
+      - name: Install Nox
+        run: |
+          pipx install --pip-args=--constraint=.github/constraints.txt nox
+          nox --version
+
+      - name: Download coverage data
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-data
+
+      - name: Combine coverage data and display human readable report
+        run: |
+          nox --session=coverage
+
+      - name: Create coverage report
+        run: |
+          nox --session=coverage -- xml
