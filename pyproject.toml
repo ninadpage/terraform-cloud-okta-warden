@@ -19,6 +19,9 @@ Changelog = "https://github.com/schubergphilis/terraform-cloud-okta-warden/relea
 python = "^3.10"
 coloredlogs = "^15.0"
 typer = "^0.9"
+terrasnek = "^0.1.13"
+okta = "^2.9.5"
+pydantic-settings = "^2.1.0"
 
 [tool.poetry.group.pre-commit]
 optional = true
@@ -45,6 +48,7 @@ Pygments = "^2.16"
 pytest = "^7.4"
 pytest-mock = "^3.12"
 pytest-cov = "^4.1"
+requests-mock = "^1.11.0"
 
 [tool.poetry.group.coverage]
 optional = true
@@ -110,11 +114,22 @@ force_single_line = true
 lines_after_imports = 2
 
 [tool.mypy]
-strict = true
+plugins = [
+  "pydantic.mypy"
+]
+
+ignore_missing_imports = true
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
 warn_unreachable = true
+no_implicit_reexport = true
 pretty = true
 show_column_numbers = true
 show_error_context = true
+
+[tool.pydantic-mypy]
+warn_required_dynamic_aliases = true
 
 [tool.semantic_release]
 version_variables = ["src/terraform_cloud_okta_warden/__init__.py:__static_version"]
