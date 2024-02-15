@@ -1,7 +1,4 @@
 {
-  "_checkout": null,
-  "_output_dir": "/Users/npage/workspace-sbp/playground",
-  "_repo_dir": "/Users/npage/.cookiecutters/cookiecutter-hypermodern-python",
   "_template": "git+ssh://git@github.com/schubergphilis/cookiecutter-hypermodern-python.git",
   "author": "Ninad Page",
   "copyright_year": "2024",

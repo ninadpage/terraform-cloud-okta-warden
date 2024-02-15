@@ -5,13 +5,13 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/terraform-cloud-okta-warden)][pypi status]
 [![License](https://img.shields.io/pypi/l/terraform-cloud-okta-warden)][license]
 
-[![Tests](https://github.com/schubergphilis/terraform-cloud-okta-warden/workflows/Tests/badge.svg)][tests]
+[![Tests](https://github.com/ninadpage/terraform-cloud-okta-warden/workflows/Tests/badge.svg)][tests]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
 [pypi status]: https://pypi.org/project/terraform-cloud-okta-warden/
-[tests]: https://github.com/schubergphilis/terraform-cloud-okta-warden/actions?workflow=Tests
+[tests]: https://github.com/ninadpage/terraform-cloud-okta-warden/actions?workflow=Tests
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
@@ -107,11 +107,11 @@ This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter]
 [@schubergphilis]: https://github.com/schubergphilis
 [pypi]: https://pypi.org/
 [hypermodern python cookiecutter]: https://github.com/schubergphilis/cookiecutter-hypermodern-python
-[file an issue]: https://github.com/schubergphilis/terraform-cloud-okta-warden/issues
+[file an issue]: https://github.com/ninadpage/terraform-cloud-okta-warden/issues
 [pip]: https://pip.pypa.io/
 [sso documentation]: https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/single-sign-on#enforced-access-policy-for-terraform-cloud-resources
 
 <!-- github-only -->
 
-[license]: https://github.com/schubergphilis/terraform-cloud-okta-warden/blob/main/LICENSE
-[contributor guide]: https://github.com/schubergphilis/terraform-cloud-okta-warden/blob/main/CONTRIBUTING.md
+[license]: https://github.com/ninadpage/terraform-cloud-okta-warden/blob/main/LICENSE
+[contributor guide]: https://github.com/ninadpage/terraform-cloud-okta-warden/blob/main/CONTRIBUTING.md

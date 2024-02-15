@@ -19,5 +19,5 @@ reference
 contributing
 Code of Conduct <codeofconduct>
 License <license>
-Changelog <https://github.com/schubergphilis/terraform-cloud-okta-warden/releases>
+Changelog <https://github.com/ninadpage/terraform-cloud-okta-warden/releases>
 ```

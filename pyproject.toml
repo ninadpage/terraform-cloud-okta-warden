@@ -6,14 +6,14 @@ description = "Terraform Cloud Okta Warden"
 authors = ["Ninad Page <ninadpage@users.noreply.github.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/schubergphilis/terraform-cloud-okta-warden"
-repository = "https://github.com/schubergphilis/terraform-cloud-okta-warden"
+homepage = "https://github.com/ninadpage/terraform-cloud-okta-warden"
+repository = "https://github.com/ninadpage/terraform-cloud-okta-warden"
 classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 
 [tool.poetry.urls]
-Changelog = "https://github.com/schubergphilis/terraform-cloud-okta-warden/releases"
+Changelog = "https://github.com/ninadpage/terraform-cloud-okta-warden/releases"
 
 [tool.poetry.dependencies]
 python = "^3.10"

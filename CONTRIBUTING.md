@@ -12,8 +12,8 @@ Here is a list of important resources for contributors:
 - [Code of Conduct]
 
 [apache 2.0 license]: https://opensource.org/licenses/Apache-2.0
-[source code]: https://github.com/schubergphilis/terraform-cloud-okta-warden
-[issue tracker]: https://github.com/schubergphilis/terraform-cloud-okta-warden/issues
+[source code]: https://github.com/ninadpage/terraform-cloud-okta-warden
+[issue tracker]: https://github.com/ninadpage/terraform-cloud-okta-warden/issues
 
 ## How to report a bug
 
@@ -105,7 +105,7 @@ $ nox --session=pre-commit -- install
 It is recommended to open an issue before starting work on anything.
 This will allow a chance to talk it over with the owners and validate your approach.
 
-[pull request]: https://github.com/schubergphilis/terraform-cloud-okta-warden/pulls
+[pull request]: https://github.com/ninadpage/terraform-cloud-okta-warden/pulls
 
 <!-- github-only -->
 
