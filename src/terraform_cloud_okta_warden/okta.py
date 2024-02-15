@@ -27,7 +27,7 @@ class OktaUserStatus(Enum):
 
 async def _list_okta_users(
     okta_config: OktaConfig, status: OktaUserStatus
-) -> dict[str, OktaUserStatus]:
+) -> dict[str, OktaUserStatus]:  # pragma: no cover
     """Internal async function to list Okta users with the given status."""
     okta_client = OktaClient(
         {

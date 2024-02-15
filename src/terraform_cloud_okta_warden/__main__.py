@@ -28,7 +28,7 @@ def version_callback(value: Optional[bool]) -> None:
 
 def warn_about_nonactive_users(
     tfc_user_emails: list[str], okta_users: dict[str, OktaUserStatus]
-) -> None:
+) -> int:
     """Warns about non-users Terraform Cloud Organization."""
     count = 0
     for email in tfc_user_emails:
@@ -45,6 +45,7 @@ def warn_about_nonactive_users(
             )
             count += 1
     logger.info(f"Affected users found: {count}")
+    return count
 
 
 @app.command()
