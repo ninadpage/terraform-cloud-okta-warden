@@ -2,7 +2,24 @@
 
 
 
+## v0.2.0 (2024-02-15)
+
+### Ci
+
+* ci: Bump actions ([`43f009e`](https://github.com/ninadpage/terraform-cloud-okta-warden/commit/43f009ea1fc8381f9f9f81cc96e96bdc251aeeae))
+
+* ci: Adjust dependabot frequency ([`987d4f0`](https://github.com/ninadpage/terraform-cloud-okta-warden/commit/987d4f07b1b83cb513bd70d3ac40dbe9b3555b23))
+
+### Feature
+
+* feat: Fix project repo URL in docs &amp; package description ([`12dbc9f`](https://github.com/ninadpage/terraform-cloud-okta-warden/commit/12dbc9f661de456aaff8fe5cbcefd27808a19531))
+
+
 ## v0.1.0 (2024-02-15)
+
+### Chore
+
+* chore(release): v0.1.0 [skip ci] ([`a39004f`](https://github.com/ninadpage/terraform-cloud-okta-warden/commit/a39004ff2cc36f811786a1a1acd0bf4cc8953334))
 
 ### Ci
 

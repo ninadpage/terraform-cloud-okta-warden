@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "terraform-cloud-okta-warden"
 # DO NOT modify the version manually - it is updated by python-semantic-release.
-version = "0.1.0"
+version = "0.2.0"
 description = "Terraform Cloud Okta Warden"
 authors = ["Ninad Page <ninadpage@users.noreply.github.com>"]
 license = "Apache-2.0"
