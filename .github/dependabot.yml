@@ -3,28 +3,28 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "ci"
       include: "scope"
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "ci"
       include: "scope"
   - package-ecosystem: pip
     directory: "/docs"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "docs"
       include: "scope"
   - package-ecosystem: pip
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     versioning-strategy: lockfile-only
     allow:
       - dependency-type: "all"
