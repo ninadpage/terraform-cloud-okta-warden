@@ -50,7 +50,7 @@ jobs:
 
       - name: Python Semantic Release
         id: release
-        uses: python-semantic-release/python-semantic-release@v9.1.0
+        uses: python-semantic-release/python-semantic-release@v8.3.0
         with:
           github_token: ${{ secrets.GH_SEMANTIC_RELEASE_PAT }}
 
@@ -60,12 +60,9 @@ jobs:
         with:
           github_token: ${{ secrets.GH_SEMANTIC_RELEASE_PAT }}
 
-      - name: Build package distributions using poetry
-        if: steps.release.outputs.released == 'true'
-        run: poetry build
-
       - name: Store package distributions as artifact
         if: steps.release.outputs.released == 'true'
+        # python-semantic-release does `poetry build` as part of the release
         uses: actions/upload-artifact@v3
         with:
           name: python-package-distributions
@@ -75,6 +72,7 @@ jobs:
     name: Upload release to PyPI
     needs: release
     runs-on: ubuntu-latest
+    concurrency: pypi-publish
     environment:
       name: pypi
       url: https://pypi.org/p/terraform-cloud-okta-warden
